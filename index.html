@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anurag Bodke — Digital Marketer 🎨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════
+   TOON POP THEME — Custom by Theme Factory
+   Colors: Sunshine #FFE135, Sky #4FC3F7, Coral #FF6B6B,
+           Mint #69EFC8, Ink #1a1a2e, White #FFFDF7
+   Fonts: Fredoka One (display) + Nunito (body)
+   Signature: thick black outlines, hard shadows, halftone bg
+   ══════════════════════════════ */
+:root {
+  --ink:    #1a1a2e;
+  --yellow: #FFE135;
+  --sky:    #4FC3F7;
+  --coral:  #FF6B6B;
+  --mint:   #69EFC8;
+  --purple: #C77DFF;
+  --white:  #FFFDF7;
+  --outline: 3px solid var(--ink);
+  --shadow:  5px 5px 0 var(--ink);
+  --shadow-sm: 3px 3px 0 var(--ink);
+  --radius: 18px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── HALFTONE BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1;
+  background-image: radial-gradient(circle, rgba(26,26,46,0.06) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--coral);
+  border: 3px solid var(--ink);
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s;
+}
+#cursor-ring {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 2.5px solid var(--ink);
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: transform .15s ease-out;
+}
+body:has(a:hover) #cursor,
+body:has(button:hover) #cursor { width: 26px; height: 26px; background: var(--yellow); }
+
+/* ── PROGRESS BAR ── */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 5px;
+  background: var(--coral);
+  border-bottom: 2px solid var(--ink);
+  width: 0%; z-index: 200;
+  transition: width .1s linear;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3rem;
+  background: var(--yellow);
+  border-bottom: var(--outline);
+  transform: translateY(-100%);
+  animation: navIn .5s ease .4s forwards;
+}
+@keyframes navIn { to { transform: translateY(0); } }
+
+.nav-logo {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.5rem; color: var(--ink);
+  text-decoration: none;
+  letter-spacing: .02em;
+}
+.nav-links { display: flex; gap: 1.8rem; list-style: none; }
+.nav-links a {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800; font-size: .82rem;
+  color: var(--ink); text-decoration: none;
+  text-transform: uppercase; letter-spacing: .07em;
+  transition: color .15s;
+}
+.nav-links a:hover { color: var(--coral); }
+.nav-cta {
+  background: var(--ink) !important;
+  color: var(--yellow) !important;
+  padding: .45rem 1.2rem !important;
+  border-radius: 100px !important;
+  border: 2px solid var(--ink) !important;
+  transition: background .2s !important;
+}
+.nav-cta:hover { background: var(--coral) !important; color: var(--white) !important; }
+
+/* ── REVEAL ── */
+.reveal {
+  opacity: 0; transform: translateY(36px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
+.reveal-delay-5 { transition-delay: .5s; }
+.reveal-delay-6 { transition-delay: .6s; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes lineUp { to { transform: translateY(0); } }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.5)} }
+@keyframes wobble { 0%,100%{transform:rotate(-2deg)} 50%{transform:rotate(2deg)} }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes spin { to {transform:rotate(360deg)} }
+
+/* ══ HERO ══ */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 9rem 3rem 4rem;
+  background: var(--sky);
+  border-bottom: var(--outline);
+  position: relative; overflow: hidden;
+}
+
+/* Floating stars background */
+.hero::after {
+  content: '★ ✦ ★ ✦ ★ ✦ ★ ✦';
+  position: absolute; top: 12%; left: 0; right: 0;
+  font-size: 1.4rem; color: rgba(26,26,46,.1);
+  letter-spacing: 3rem; pointer-events: none;
+  animation: wobble 4s ease-in-out infinite;
+}
+
+.hero-left { z-index: 2; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Nunito', sans-serif; font-weight: 800;
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink);
+  background: var(--mint);
+  border: var(--outline);
+  border-radius: 100px;
+  padding: 7px 18px;
+  margin-bottom: 1.8rem;
+  box-shadow: var(--shadow-sm);
+  opacity: 0; animation: fadeUp .6s ease .7s forwards;
+}
+.hero-tag::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--coral); border: 2px solid var(--ink);
+  animation: pulse 1.8s infinite;
+}
+
+.hero h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(3.2rem, 6.5vw, 6rem);
+  line-height: .98; font-weight: 400;
+  letter-spacing: .01em;
+  margin-bottom: 1.5rem;
+  -webkit-text-stroke: 2px var(--ink);
+  color: var(--white);
+  text-shadow: 4px 4px 0 var(--ink);
+}
+.hero h1 .line { display: block; overflow: hidden; }
+.hero h1 .line span {
+  display: block;
+  transform: translateY(110%);
+  animation: lineUp .9s cubic-bezier(.22,1,.36,1) forwards;
+}
+.hero h1 .line:nth-child(1) span { animation-delay: .8s; }
+.hero h1 .line:nth-child(2) span { animation-delay: .95s; }
+.hero h1 .line:nth-child(3) span {
+  animation-delay: 1.1s;
+  color: var(--yellow);
+  -webkit-text-stroke: 2px var(--ink);
+  text-shadow: 4px 4px 0 var(--ink);
+}
+
+.hero-desc {
+  font-size: 1rem; color: var(--ink); font-weight: 600;
+  line-height: 1.7; max-width: 400px;
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeUp .6s ease 1.4s forwards;
+}
+
+.hero-btns {
+  display: flex; gap: 14px;
+  opacity: 0; animation: fadeUp .6s ease 1.6s forwards;
+}
+
+.btn-primary {
+  background: var(--coral); color: var(--white);
+  padding: .9rem 2rem; border-radius: var(--radius);
+  font-family: 'Nunito', sans-serif; font-size: .9rem; font-weight: 800;
+  border: var(--outline); box-shadow: var(--shadow);
+  cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--ink); }
+.btn-primary:active { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--ink); }
+
+.btn-ghost {
+  background: var(--white); color: var(--ink);
+  padding: .9rem 2rem; border-radius: var(--radius);
+  font-family: 'Nunito', sans-serif; font-size: .9rem; font-weight: 800;
+  border: var(--outline); box-shadow: var(--shadow);
+  cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-ghost:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--ink); background: var(--yellow); }
+.btn-ghost:active { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--ink); }
+
+/* Hero right — cartoon character box */
+.hero-right {
+  z-index: 2; display: flex; align-items: center; justify-content: center;
+  opacity: 0; animation: fadeIn 1s ease 1.1s forwards;
+}
+
+.toon-card {
+  background: var(--yellow);
+  border: var(--outline); border-radius: 28px;
+  box-shadow: 8px 8px 0 var(--ink);
+  padding: 2.5rem 2rem; text-align: center;
+  width: 280px;
+  animation: bounce 3s ease-in-out infinite;
+}
+.toon-avatar {
+  width: 110px; height: 110px; border-radius: 50%;
+  background: var(--coral); border: var(--outline);
+  margin: 0 auto 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fredoka One', cursive; font-size: 2.8rem; color: var(--white);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.toon-name {
+  font-family: 'Fredoka One', cursive; font-size: 1.6rem;
+  color: var(--ink); margin-bottom: .3rem;
+}
+.toon-role {
+  font-size: .8rem; font-weight: 800; color: var(--ink);
+  text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 1.2rem;
+}
+.toon-badges { display: flex; flex-direction: column; gap: 8px; }
+.toon-badge {
+  background: var(--white); border: 2px solid var(--ink);
+  border-radius: 10px; padding: 6px 12px;
+  font-size: .78rem; font-weight: 700;
+  display: flex; align-items: center; gap: 6px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+/* speech bubble */
+.speech-bubble {
+  position: relative;
+  background: var(--white);
+  border: var(--outline); border-radius: 20px;
+  padding: 10px 16px;
+  font-size: .82rem; font-weight: 700; color: var(--ink);
+  margin-top: 1rem; display: inline-block;
+  box-shadow: var(--shadow-sm);
+}
+.speech-bubble::before {
+  content: '';
+  position: absolute; top: -18px; left: 50%;
+  transform: translateX(-50%);
+  border: 9px solid transparent;
+  border-bottom-color: var(--ink);
+}
+.speech-bubble::after {
+  content: '';
+  position: absolute; top: -12px; left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-bottom-color: var(--white);
+}
+
+/* ══ SECTIONS COMMON ══ */
+section { padding: 6rem 3rem; }
+
+.section-tag {
+  font-family: 'Nunito', sans-serif;
+  font-size: .72rem; font-weight: 800;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-tag::before {
+  content: ''; display: inline-block;
+  width: 28px; height: 4px;
+  background: var(--coral); border-radius: 4px;
+  border: 1.5px solid var(--ink);
+}
+
+.section-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  line-height: 1.05; letter-spacing: .01em;
+  margin-bottom: 1rem; color: var(--ink);
+}
+.section-title em {
+  font-style: normal; color: var(--coral);
+  -webkit-text-stroke: 1.5px var(--ink);
+}
+
+/* wavy section divider */
+.wavy-top {
+  height: 50px; overflow: hidden; line-height: 0;
+  transform: scaleX(-1);
+}
+.wavy-top svg { display: block; width: 100%; height: 50px; }
+
+/* ══ JOURNEY ══ */
+#journey { background: var(--white); border-top: var(--outline); }
+
+.journey-intro { max-width: 560px; margin-bottom: 4rem; }
+.journey-intro p { font-weight: 600; color: rgba(26,26,46,.65); line-height: 1.75; margin-top: .8rem; }
+
+.timeline { position: relative; padding-left: 2.5rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px; background: var(--ink); border-radius: 4px;
+}
+
+.tl-item { position: relative; padding-bottom: 3.5rem; padding-left: 2rem; }
+.tl-item:last-child { padding-bottom: 0; }
+
+.tl-dot {
+  position: absolute; left: -2.6rem; top: 4px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--white); border: 3px solid var(--ink);
+  transition: background .4s, box-shadow .4s;
+}
+.tl-item.visible .tl-dot { background: var(--yellow); box-shadow: 0 0 0 4px rgba(255,225,53,.4); }
+
+.tl-year {
+  font-size: .72rem; font-weight: 800; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--coral); margin-bottom: .5rem;
+}
+
+.tl-card {
+  background: var(--white);
+  border: var(--outline); border-radius: var(--radius);
+  padding: 1.8rem; box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+}
+.tl-card:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--ink); }
+
+.tl-card h3 {
+  font-family: 'Fredoka One', cursive; font-size: 1.35rem;
+  margin-bottom: .25rem; color: var(--ink);
+}
+.tl-card .tl-company { font-size: .85rem; font-weight: 700; color: rgba(26,26,46,.5); margin-bottom: .8rem; }
+.tl-card .tl-desc { font-size: .9rem; font-weight: 600; color: rgba(26,26,46,.7); line-height: 1.7; }
+
+.tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+.tl-tag {
+  font-size: .72rem; font-weight: 800; padding: 4px 12px;
+  border-radius: 100px;
+  border: 2px solid var(--ink); background: var(--sky);
+  color: var(--ink); box-shadow: 2px 2px 0 var(--ink);
+}
+
+.tl-cert-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 1rem;
+  background: var(--mint); border: 2px solid var(--ink);
+  color: var(--ink); font-size: .72rem; font-weight: 800;
+  padding: 5px 12px; border-radius: 100px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+/* ══ SKILLS ══ */
+#skills {
+  background: var(--purple);
+  border-top: var(--outline); border-bottom: var(--outline);
+}
+#skills .section-title { color: var(--white); -webkit-text-stroke: 1.5px var(--ink); text-shadow: 3px 3px 0 var(--ink); }
+#skills .section-title em { color: var(--yellow); }
+#skills .section-tag { color: var(--white); }
+#skills .section-tag::before { background: var(--yellow); }
+
+.skills-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1.2rem; margin-top: 3.5rem;
+}
+
+.skill-cell {
+  background: var(--white);
+  border: var(--outline); border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+  cursor: default; position: relative; overflow: hidden;
+}
+.skill-cell:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--ink); }
+
+.skill-ring-wrap { margin-bottom: 1rem; }
+.skill-ring-svg { transform: rotate(-90deg); }
+.skill-ring-track { fill: none; stroke: rgba(26,26,46,.1); stroke-width: 4; }
+.skill-ring-fill {
+  fill: none; stroke: var(--coral); stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 157; stroke-dashoffset: 157;
+  transition: stroke-dashoffset 1.4s cubic-bezier(.22,1,.36,1);
+}
+
+.skill-name {
+  font-family: 'Fredoka One', cursive; font-size: 1.05rem;
+  color: var(--ink); margin-bottom: .3rem;
+}
+.skill-desc { font-size: .78rem; font-weight: 600; color: rgba(26,26,46,.55); line-height: 1.55; }
+.skill-level {
+  font-family: 'Fredoka One', cursive; font-size: 1.8rem;
+  color: var(--purple); position: absolute; top: 1.2rem; right: 1.2rem;
+  opacity: 0; transition: opacity .25s;
+}
+.skill-cell:hover .skill-level { opacity: 1; }
+
+/* ══ IMPACT ══ */
+#impact {
+  background: var(--yellow);
+  border-top: var(--outline); border-bottom: var(--outline);
+}
+#impact .section-title em { color: var(--coral); }
+
+.impact-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1.2rem; margin-top: 3.5rem;
+}
+
+.impact-cell {
+  background: var(--white);
+  border: var(--outline); border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+  text-align: center;
+}
+.impact-cell:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--ink); }
+
+.impact-num {
+  font-family: 'Fredoka One', cursive;
+  font-size: 3.8rem; line-height: 1; color: var(--ink);
+  display: flex; align-items: baseline; justify-content: center; gap: 2px;
+}
+.impact-num .suffix { font-size: 1.8rem; color: var(--coral); }
+.impact-label {
+  font-size: .78rem; font-weight: 800; color: var(--ink);
+  text-transform: uppercase; letter-spacing: .07em; margin-top: .7rem;
+}
+.impact-sub { font-size: .7rem; font-weight: 600; color: rgba(26,26,46,.45); margin-top: .3rem; }
+
+/* ══ CERTS ══ */
+#certs {
+  background: var(--mint);
+  border-top: var(--outline); border-bottom: var(--outline);
+}
+#certs .section-title em { color: var(--ink); opacity: .4; }
+
+.certs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3.5rem; }
+
+.cert-card {
+  background: var(--white);
+  border: var(--outline); border-radius: var(--radius);
+  padding: 2.5rem;
+  box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+  position: relative;
+}
+.cert-card:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--ink); }
+
+.cert-logo { font-size: 3rem; margin-bottom: 1.2rem; display: block; animation: wobble 3s ease-in-out infinite; }
+.cert-issuer {
+  font-size: .7rem; font-weight: 800; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(26,26,46,.4); margin-bottom: .4rem;
+}
+.cert-name {
+  font-family: 'Fredoka One', cursive; font-size: 1.45rem; margin-bottom: .9rem; color: var(--ink);
+}
+.cert-meta { display: flex; align-items: center; gap: 8px; font-size: .78rem; font-weight: 700; color: rgba(26,26,46,.5); }
+.cert-grade {
+  background: var(--mint); border: 2px solid var(--ink);
+  color: var(--ink); padding: 3px 10px; border-radius: 100px;
+  font-size: .72rem; font-weight: 800; box-shadow: 2px 2px 0 var(--ink);
+}
+.cert-valid {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 1rem;
+  background: var(--sky); border: 2px solid var(--ink);
+  color: var(--ink); font-size: .72rem; font-weight: 800;
+  padding: 4px 12px; border-radius: 100px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.cert-valid::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--coral); border: 1.5px solid var(--ink);
+  animation: pulse 2s infinite;
+}
+
+/* ══ TOOLS ══ */
+#tools {
+  background: var(--coral);
+  border-top: var(--outline); border-bottom: var(--outline);
+  padding-top: 5rem; padding-bottom: 5rem;
+}
+#tools .section-title { color: var(--white); text-shadow: 3px 3px 0 var(--ink); }
+#tools .section-title em { color: var(--yellow); }
+#tools .section-tag { color: var(--white); }
+#tools .section-tag::before { background: var(--yellow); }
+
+.tools-marquee-wrap {
+  overflow: hidden; margin-top: 3rem;
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.tools-marquee {
+  display: flex; gap: 1rem; width: max-content;
+  animation: marquee 22s linear infinite;
+}
+.tools-marquee:hover { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+.tool-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 100px;
+  border: 2.5px solid var(--ink); background: var(--white);
+  font-size: .82rem; font-weight: 800; color: var(--ink);
+  white-space: nowrap;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: background .2s;
+}
+.tool-pill:hover { background: var(--yellow); }
+.tool-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--coral); border: 1.5px solid var(--ink);
+}
+
+/* ══ CONTACT ══ */
+#contact {
+  background: var(--ink);
+  border-top: 4px solid var(--ink);
+  padding: 8rem 3rem; text-align: center;
+}
+.contact-big {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2.8rem, 7.5vw, 6.5rem);
+  line-height: 1.0; color: var(--white);
+  text-shadow: 4px 4px 0 var(--coral);
+  margin-bottom: 1.5rem;
+}
+.contact-big em { font-style: normal; color: var(--yellow); text-shadow: 4px 4px 0 var(--coral); }
+.contact-desc {
+  font-size: 1rem; font-weight: 700; color: rgba(255,253,247,.55);
+  max-width: 480px; margin: 0 auto 3rem; line-height: 1.75;
+}
+
+.contact-links { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+
+.contact-card {
+  background: var(--white);
+  border: var(--outline); border-radius: var(--radius);
+  padding: 1rem 1.8rem; text-decoration: none;
+  color: var(--ink); font-size: .88rem; font-weight: 800;
+  display: inline-flex; align-items: center; gap: 10px;
+  box-shadow: var(--shadow);
+  transition: transform .15s, box-shadow .15s, background .15s;
+}
+.contact-card:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--yellow); background: var(--yellow); }
+
+.avail-strip {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 2px solid var(--mint); background: rgba(105,239,200,.1);
+  padding: 8px 20px; border-radius: 100px;
+  font-size: .78rem; font-weight: 800; color: var(--mint);
+  letter-spacing: .05em;
+}
+.avail-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--mint); border: 1.5px solid var(--ink);
+  animation: pulse 2s infinite;
+}
+
+/* ══ FOOTER ══ */
+footer {
+  background: var(--yellow);
+  padding: 1.8rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: var(--outline);
+  font-size: .8rem; font-weight: 800; color: var(--ink);
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 3rem; }
+  .hero-right { display: none; }
+  section { padding: 5rem 1.5rem; }
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .skills-grid { grid-template-columns: repeat(2,1fr); }
+  .impact-grid { grid-template-columns: repeat(2,1fr); }
+  .certs-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">✦ AB.</a>
+  <ul class="nav-links">
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me!</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-tag">✨ Available for opportunities</div>
+    <h1>
+      <span class="line"><span>Anurag</span></span>
+      <span class="line"><span>Bodke</span></span>
+      <span class="line"><span>Digital Marketer!</span></span>
+    </h1>
+    <p class="hero-desc">
+      Performance-driven digital marketer with certified Google Analytics expertise, social media strategy, and paid campaigns. Currently growing brands at Doit Industries! 🚀
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">
+        ✉️ Get in Touch
+      </a>
+      <a href="#journey" class="btn-ghost">
+        My Journey ↓
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div style="position:relative;">
+      <div class="toon-card">
+        <div class="toon-avatar">AB</div>
+        <div class="toon-name">Anurag Bodke</div>
+        <div class="toon-role">📱 Digital Marketing Executive</div>
+        <div class="toon-badges">
+          <div class="toon-badge">📊 Google Analytics Certified</div>
+          <div class="toon-badge">🎓 Diploma in DM · A+ Grade</div>
+          <div class="toon-badge">🏢 Doit Industries Ltd.</div>
+        </div>
+        <div class="speech-bubble">Open to new opportunities! 🎯</div>
+      </div>
+      <!-- floating stars -->
+      <div style="position:absolute;top:-20px;right:-24px;font-size:2rem;animation:wobble 2.5s ease-in-out infinite;">⭐</div>
+      <div style="position:absolute;bottom:-16px;left:-20px;font-size:1.5rem;animation:wobble 3s ease-in-out infinite reverse;">✦</div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="journey-intro">
+    <div class="section-tag reveal">📖 Career Story</div>
+    <h2 class="section-title reveal reveal-delay-1">The <em>Journey</em> So Far</h2>
+    <p class="reveal reveal-delay-2">From building sharp communication skills to driving digital campaigns at scale — every step shaped a better marketer! 💪</p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2024 — Present 🔥</div>
+      <div class="tl-card">
+        <h3>Digital Marketing Executive</h3>
+        <div class="tl-company">Doit Industries Limited · Full-time</div>
+        <p class="tl-desc">Managing end-to-end digital presence — social media content calendars, performance ad campaigns, video editing and analytics reporting. Building brand visibility through data-driven decisions.</p>
+        <div class="tl-tags">
+          <span class="tl-tag">📱 Social Media</span>
+          <span class="tl-tag">📈 Performance Ads</span>
+          <span class="tl-tag">🎬 Video Editing</span>
+          <span class="tl-tag">📊 Google Analytics</span>
+          <span class="tl-tag">🎯 Campaign Management</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal reveal-delay-1">
+      <div class="tl-dot"></div>
+      <div class="tl-year">July 2025 🏆</div>
+      <div class="tl-card">
+        <h3>Google Analytics Certification</h3>
+        <div class="tl-company">Google · Official Certification</div>
+        <p class="tl-desc">Earned the Google Analytics Certification — validating proficiency in GA4 tracking, audience analysis, conversion funnels, and data-driven marketing decisions.</p>
+        <div class="tl-cert-badge">✅ Certified · Valid until July 2026 · ID: 154062854</div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal reveal-delay-2">
+      <div class="tl-dot"></div>
+      <div class="tl-year">July 2025 🎓</div>
+      <div class="tl-card">
+        <h3>Diploma in Digital Marketing</h3>
+        <div class="tl-company">Raj Software Technology · Raj Computers Academy, Dahisar</div>
+        <p class="tl-desc">Completed a comprehensive Digital Marketing Diploma covering SEO, SEM, social media strategy, email marketing, content marketing and performance analytics.</p>
+        <div class="tl-tags">
+          <span class="tl-tag">🔍 SEO / SEM</span>
+          <span class="tl-tag">✍️ Content Strategy</span>
+          <span class="tl-tag">📧 Email Marketing</span>
+        </div>
+        <div class="tl-cert-badge">✅ A+ Grade · Excellence Certificate · ISO 9001:2015</div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal reveal-delay-3">
+      <div class="tl-dot"></div>
+      <div class="tl-year">Education 🏫</div>
+      <div class="tl-card">
+        <h3>BAF — Bachelor of Accounting & Finance</h3>
+        <div class="tl-company">Mumbai University · Maharashtra Board (SSC & HSC)</div>
+        <p class="tl-desc">Strong analytical and financial foundation that directly supports campaign budgeting, ROI measurement, and data-driven marketing decisions.</p>
+        <div class="tl-tags">
+          <span class="tl-tag">📊 Advance Excel</span>
+          <span class="tl-tag">🧾 Tally ERP 9</span>
+          <span class="tl-tag">💰 Financial Analysis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag reveal">⚡ Expertise</div>
+  <h2 class="section-title reveal reveal-delay-1">Core <em>Skills</em></h2>
+
+  <div class="skills-grid">
+    <div class="skill-cell reveal reveal-delay-1" data-pct="90">
+      <div class="skill-ring-wrap">
+        <svg class="skill-ring-svg" width="54" height="54" viewBox="0 0 54 54">
+          <circle class="skill-ring-track" cx="27" cy="27" r="22"/>
+          <circle class="skill-ring-fill" cx="27" cy="27" r="22"/>
+        </svg>
+      </div>
+      <div class="skill-name">Digital Marketing</div>
+      <div class="skill-desc">Full-funnel strategy — awareness to conversion.</div>
+      <div class="skill-level">90%</div>
+    </div>
+    <div class="skill-cell reveal reveal-delay-2" data-pct="85">
+      <div class="skill-ring-wrap">
+        <svg class="skill-ring-svg" width="54" height="54" viewBox="0 0 54 54">
+          <circle class="skill-ring-track" cx="27" cy="27" r="22"/>
+          <circle class="skill-ring-fill" cx="27" cy="27" r="22" style="stroke:var(--sky)"/>
+        </svg>
+      </div>
+      <div class="skill-name">Social Media Marketing</div>
+      <div class="skill-desc">Content calendars, reels, engagement growth.</div>
+      <div class="skill-level">85%</div>
+    </div>
+    <div class="skill-cell reveal reveal-delay-3" data-pct="80">
+      <div class="skill-ring-wrap">
+        <svg class="skill-ring-svg" width="54" height="54" viewBox="0 0 54 54">
+          <circle class="skill-ring-track" cx="27" cy="27" r="22"/>
+          <circle class="skill-ring-fill" cx="27" cy="27" r="22" style="stroke:var(--mint)"/>
+        </svg>
+      </div>
+      <div class="skill-name">Performance Marketing</div>
+      <div class="skill-desc">Paid ads, ROI tracking, A/B testing.</div>
+      <div class="skill-level">80%</div>
+    </div>
+    <div class="skill-cell reveal reveal-delay-4" data-pct="88">
+      <div class="skill-ring-wrap">
+        <svg class="skill-ring-svg" width="54" height="54" viewBox="0 0 54 54">
+          <circle class="skill-ring-track" cx="27" cy="27" r="22"/>
+          <circle class="skill-ring-fill" cx="27" cy="27" r="22" style="stroke:var(--yellow)"/>
+        </svg>
+      </div>
+      <div class="skill-name">Google Analytics GA4</div>
+      <div class="skill-desc">Certified. Funnels, audiences & conversions.</div>
+      <div class="skill-level">88%</div>
+    </div>
+    <div class="skill-cell reveal reveal-delay-5" data-pct="75">
+      <div class="skill-ring-wrap">
+        <svg class="skill-ring-svg" width="54" height="54" viewBox="0 0 54 54">
+          <circle class="skill-ring-track" cx="27" cy="27" r="22"/>
+          <circle class="skill-ring-fill" cx="27" cy="27" r="22" style="stroke:var(--purple)"/>
+        </svg>
+      </div>
+      <div class="skill-name">Video Editing</div>
+      <div class="skill-desc">Reels, ads, short-form creative content.</div>
+      <div class="skill-level">75%</div>
+    </div>
+    <div class="skill-cell reveal reveal-delay-6" data-pct="82">
+      <div class="skill-ring-wrap">
+        <svg class="skill-ring-svg" width="54" height="54" viewBox="0 0 54 54">
+          <circle class="skill-ring-track" cx="27" cy="27" r="22"/>
+          <circle class="skill-ring-fill" cx="27" cy="27" r="22" style="stroke:var(--coral)"/>
+        </svg>
+      </div>
+      <div class="skill-name">Advance Excel</div>
+      <div class="skill-desc">Dashboards, pivot tables, campaign reports.</div>
+      <div class="skill-level">82%</div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="section-tag reveal">🔢 By the Numbers</div>
+  <h2 class="section-title reveal reveal-delay-1">What the <em>Numbers</em> Say!</h2>
+  <div class="impact-grid">
+    <div class="impact-cell reveal reveal-delay-1">
+      <div class="impact-num"><span class="count-up" data-target="1">0</span><span class="suffix">+</span></div>
+      <div class="impact-label">Year at Doit Industries</div>
+      <div class="impact-sub">Active Digital Marketing Role</div>
+    </div>
+    <div class="impact-cell reveal reveal-delay-2">
+      <div class="impact-num"><span class="count-up" data-target="2">0</span></div>
+      <div class="impact-label">Certifications Earned</div>
+      <div class="impact-sub">Google Analytics + DM Diploma</div>
+    </div>
+    <div class="impact-cell reveal reveal-delay-3">
+      <div class="impact-num"><span class="suffix" style="font-size:3.5rem;color:var(--ink);">A</span><span class="suffix">+</span></div>
+      <div class="impact-label">Diploma Grade</div>
+      <div class="impact-sub">Raj Software Technology, 2025</div>
+    </div>
+    <div class="impact-cell reveal reveal-delay-4">
+      <div class="impact-num"><span class="count-up" data-target="6">0</span><span class="suffix">+</span></div>
+      <div class="impact-label">Core Skills</div>
+      <div class="impact-sub">Marketing, Analytics, Creative</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="section-tag reveal">🏆 Verified</div>
+  <h2 class="section-title reveal reveal-delay-1">Certifications</h2>
+  <div class="certs-grid">
+    <div class="cert-card reveal reveal-delay-1">
+      <span class="cert-logo">📊</span>
+      <div class="cert-issuer">Google · Skillshop</div>
+      <div class="cert-name">Google Analytics Certification</div>
+      <div class="cert-meta">
+        <span>Issued: July 3, 2025</span>
+        <span>·</span>
+        <span>ID: 154062854</span>
+      </div>
+      <div class="cert-valid">Active · Valid until July 3, 2026</div>
+    </div>
+    <div class="cert-card reveal reveal-delay-2">
+      <span class="cert-logo">🎓</span>
+      <div class="cert-issuer">Raj Software Technology (India) Ltd.</div>
+      <div class="cert-name">Diploma in Digital Marketing</div>
+      <div class="cert-meta">
+        <span>July 2025</span>
+        <span>·</span>
+        <span class="cert-grade">A+ Grade</span>
+      </div>
+      <div class="cert-valid" style="background:var(--mint);border-color:var(--ink);color:var(--ink);">
+        Certificate of Excellence · ISO 9001:2015
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="section-tag reveal">🧰 Toolkit</div>
+  <h2 class="section-title reveal reveal-delay-1">Tools I <em>Work With</em></h2>
+  <div class="tools-marquee-wrap reveal reveal-delay-2">
+    <div class="tools-marquee" id="marquee"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal" style="margin-bottom:2rem;">
+    <div class="avail-strip"><div class="avail-dot"></div>Currently open to new opportunities!</div>
+  </div>
+  <h2 class="contact-big reveal reveal-delay-1">Let's Work<br><em>Together!</em> 🎉</h2>
+  <p class="contact-desc reveal reveal-delay-2">Looking for a performance-focused digital marketer who brings both creativity and analytics to the table? Let's talk! 🚀</p>
+  <div class="contact-links reveal reveal-delay-3">
+    <a href="mailto:bodkeanurag@gmail.com" class="contact-card">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      bodkeanurag@gmail.com
+    </a>
+    <a href="tel:8976337470" class="contact-card">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +91 89763 37470
+    </a>
+    <a href="tel:9372206579" class="contact-card">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +91 93722 06579
+    </a>
+  </div>
+  <div class="reveal reveal-delay-4" style="margin-top:1.5rem;font-size:.8rem;font-weight:700;color:rgba(255,253,247,.3);">
+    📍 Mumbai, Maharashtra · 🗣️ Marathi, Hindi, English
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Anurag Shankar Bodke ✦</span>
+  <span>Digital Marketing Executive · Mumbai 🏙️</span>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+});
+(function animRing(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+})();
+
+// Progress bar
+const pbar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  pbar.style.width = (window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+});
+
+// Reveal on scroll
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(r => revealObs.observe(r));
+
+// Timeline dots
+const tlObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); tlObs.unobserve(e.target); } });
+}, { threshold: .2 });
+document.querySelectorAll('.tl-item').forEach(t => tlObs.observe(t));
+
+// Skill rings
+const skillObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const pct = parseInt(e.target.dataset.pct)||80;
+      const rf  = e.target.querySelector('.skill-ring-fill');
+      if(rf) rf.style.strokeDashoffset = 138*(1-pct/100);
+      skillObs.unobserve(e.target);
+    }
+  });
+}, { threshold: .3 });
+document.querySelectorAll('.skill-cell').forEach(c => skillObs.observe(c));
+
+// Count-up
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const target = parseInt(e.target.dataset.target);
+      let start=null;
+      (function step(ts){
+        if(!start) start=ts;
+        const p=Math.min((ts-start)/1200,1);
+        e.target.textContent=Math.round((1-Math.pow(1-p,3))*target);
+        if(p<1) requestAnimationFrame(step);
+      })(performance.now());
+      countObs.unobserve(e.target);
+    }
+  });
+}, { threshold: .5 });
+document.querySelectorAll('.count-up').forEach(c => countObs.observe(c));
+
+// Tools marquee
+const tools = [
+  'Google Analytics 4','Meta Ads Manager','Google Ads','Instagram','Facebook',
+  'MS Office','Advance Excel','Tally ERP 9','Video Editing','Canva',
+  'SEO Tools','Email Marketing','Content Strategy','MS-CIT','YouTube',
+];
+const marquee = document.getElementById('marquee');
+[...tools,...tools].forEach(t => {
+  const p=document.createElement('div');
+  p.className='tool-pill';
+  p.innerHTML=`<div class="tool-dot"></div>${t}`;
+  marquee.appendChild(p);
+});
+</script>
+</body>
+</html>
